@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
 
-app.get("/", (req, res) => {
+app.get("/api/v1", (req, res) => {
     res.status(StatusCodes.OK).json({
         success: true,
         data: "Home page",
