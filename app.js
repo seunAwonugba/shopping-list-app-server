@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
+const { sequelize } = require("./models/index");
 const app = express();
 
 const port = process.env.PORT;
@@ -20,6 +21,24 @@ app.all("*", (req, res) => {
     });
 });
 
-app.listen(port, host, () => {
-    console.log(`⚡️[server]: Server is running at http://${host}:${port}`);
-});
+const startServer = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log(
+            `⚡️[database]: Connection has been established successfully.`
+        );
+
+        app.listen(port, host, () => {
+            console.log(
+                `⚡️[server]: Server is running at http://${host}:${port}`
+            );
+        });
+    } catch (error) {
+        console.error(
+            "😔[database]: Unable to connect to the database:",
+            error
+        );
+    }
+};
+
+startServer();
