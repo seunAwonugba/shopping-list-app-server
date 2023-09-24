@@ -1,12 +1,10 @@
-const Item = require("../models/itemsModel/item_model");
+const Item = require("../models/itemsModel/index");
 const { StatusCodes } = require("http-status-codes");
 
 const ItemController = {
   // Retrieve all items
 
   getItems: async (req, res) => {
-    await Item.sync(); // This creates the table if it doesn't exist
-
     try {
       const item = await Item.findAll();
 
