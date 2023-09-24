@@ -1,5 +1,3 @@
-const model = require("./index");
-
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
     name: {
