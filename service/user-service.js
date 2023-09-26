@@ -8,7 +8,7 @@ class UserService {
   async signUp(data) {
     const createUser = await this.userRepository.createUser(data);
 
-    console.log("==user==", createUser);
+    // console.log("==user==", createUser);
 
     return { success: true, data: createUser };
   }
