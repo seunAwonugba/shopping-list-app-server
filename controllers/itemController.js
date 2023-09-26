@@ -1,4 +1,3 @@
-const Item = require("../models/itemsModel/index");
 const { StatusCodes } = require("http-status-codes");
 
 const ItemController = {
