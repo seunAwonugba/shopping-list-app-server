@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const { sequelize } = require("./models/index");
-const itemRouter = require("./routers/itemRouters");
+const user = require("./routers/user");
 
 const app = express();
 
@@ -10,7 +10,7 @@ const port = process.env.PORT;
 const host = process.env.HOST;
 
 app.use(express.json());
-app.use("/api/v1", itemRouter);
+app.use("/api/v1/user", user);
 
 app.get("/api/v1", (req, res) => {
   res.status(StatusCodes.OK).json({

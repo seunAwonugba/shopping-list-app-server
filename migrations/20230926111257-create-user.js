@@ -31,7 +31,7 @@ module.exports = {
         validate: {
           notEmpty: "Email is required",
           notNull: "Email can not be null",
-          isEmail: "Please use a valid email",
+          isEmail: { msg: "Please use a valid email" },
         },
         unique: true,
       },
