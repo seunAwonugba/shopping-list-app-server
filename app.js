@@ -12,7 +12,7 @@ const host = process.env.HOST;
 
 app.use(express.json());
 app.use("/api/v1/user", user);
-app.use("/api/v1/item", item);
+app.use("/api/v1/items", item);
 
 app.get("/api/v1", (req, res) => {
   res.status(StatusCodes.OK).json({
