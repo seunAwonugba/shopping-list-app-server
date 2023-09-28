@@ -42,10 +42,10 @@ class ItemService {
     }
 
     async deleteItem(id) {
-        const item = await this.getItem(id);
+        const item = await this.itemRepository.getItem(id);
 
-        if (!item.success) {
-            return customError("Item not found", "404", "Not Found");
+        if (!item) {
+            throw new BadRequest("Item not found");
         }
 
         await this.itemRepository.deleteItem(id);
