@@ -14,10 +14,10 @@ module.exports = {
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "First Name is required",
+                        msg: "Product Name is required",
                     },
                     notNull: {
-                        msg: "First Name can not be null",
+                        msg: "Product Name can not be null",
                     },
                 },
             },
@@ -26,10 +26,10 @@ module.exports = {
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "Last Name is required",
+                        msg: "Quantity is required",
                     },
                     notNull: {
-                        msg: "Last Name can not be null",
+                        msg: "Quantity can not be null",
                     },
                 },
             },
