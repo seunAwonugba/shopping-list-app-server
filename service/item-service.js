@@ -1,56 +1,57 @@
+const { BadRequest } = require("../error");
 const ItemRepository = require("../repository/item-respository");
 const customError = require("../utils/custom-error");
 
 class ItemService {
-  constructor() {
-    this.ItemRepository = new ItemRepository();
-  }
-
-  async create(data) {
-    const createItem = await this.ItemRepository.createItem(data);
-
-    return { success: true, data: createItem };
-  }
-
-  async getAllItems() {
-    const items = await this.ItemRepository.getAllItems();
-
-    return { success: true, data: items };
-  }
-
-  async getItem(id) {
-    const item = await this.ItemRepository.getItem(id);
-
-    if (!item) {
-      return customError("Item not found", "404", "Not Found");
+    constructor() {
+        this.itemRepository = new ItemRepository();
     }
 
-    return { success: true, data: item };
-  }
+    async create(data) {
+        const createItem = await this.itemRepository.createItem(data);
 
-  async updateItem(id, data) {
-    const item = await this.getItem(id);
-
-    if (!item.success) {
-      return customError("Item not found", "404", "Not Found");
+        return { success: true, data: createItem };
     }
 
-    await this.ItemRepository.updateItem(data, id);
+    async getItems() {
+        const items = await this.itemRepository.getItems();
 
-    return { success: true, data: "Item successfully updated" };
-  }
-
-  async deleteItem(id) {
-    const item = await this.getItem(id);
-
-    if (!item.success) {
-      return customError("Item not found", "404", "Not Found");
+        return { success: true, data: items };
     }
 
-    await this.ItemRepository.deleteItem(id);
+    async getItem(id) {
+        const item = await this.itemRepository.getItem(id);
 
-    return { success: true, data: "Item deleted successfully" };
-  }
+        if (!item) {
+            throw new BadRequest("Item not found");
+        }
+
+        return { success: true, data: item };
+    }
+
+    async updateItem(id, data) {
+        const item = await this.itemRepository.getItem(id);
+
+        if (!item) {
+            throw new BadRequest("Item not found");
+        }
+
+        const updatedItem = await this.itemRepository.updateItem(data, id);
+
+        return { success: true, data: updatedItem };
+    }
+
+    async deleteItem(id) {
+        const item = await this.itemRepository.getItem(id);
+
+        if (!item) {
+            throw new BadRequest("Item not found");
+        }
+
+        await this.itemRepository.deleteItem(id);
+
+        return { success: true, data: "Item deleted successfully" };
+    }
 }
 
 module.exports = ItemService;

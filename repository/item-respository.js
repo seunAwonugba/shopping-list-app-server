@@ -1,35 +1,42 @@
 const { Item } = require("../models");
 
 class ItemRepository {
-  async createItem(data) {
-    const createItem = await Item.create(data);
+    async createItem(data) {
+        const createItem = await Item.create(data);
 
-    return createItem;
-  }
+        return createItem;
+    }
 
-  async getAllItems() {
-    const items = await Item.findAll();
+    async getItems() {
+        const items = await Item.findAll();
 
-    return items;
-  }
+        return items;
+    }
 
-  async getItem(id) {
-    const item = await Item.findByPk(id);
+    async getItem(id) {
+        const item = await Item.findByPk(id);
 
-    return item;
-  }
+        return item;
+    }
 
-  async updateItem(data, id) {
-    const updateItem = await Item.update(data, { where: { id: id } });
+    async updateItem(data, id) {
+        const updateItem = await Item.update(data, {
+            where: {
+                id,
+            },
+            returning: true,
+        });
 
-    return updateItem;
-  }
+        const [_numAffectedRows, [updatedData]] = updateItem;
 
-  async deleteItem(id) {
-    const deleteItem = await Item.destroy({ where: { id: id } });
+        return updatedData;
+    }
 
-    return deleteItem;
-  }
+    async deleteItem(id) {
+        const deleteItem = await Item.destroy({ where: { id: id } });
+
+        return deleteItem;
+    }
 }
 
 module.exports = ItemRepository;
