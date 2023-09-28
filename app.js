@@ -4,6 +4,8 @@ const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const { sequelize } = require("./models/index");
 const user = require("./routers/user");
 const item = require("./routers/item");
+var cors = require('cors')
+
 const { errorMiddleware } = require("./middleware/errorMiddleware");
 
 const app = express();
