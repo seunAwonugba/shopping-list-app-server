@@ -14,6 +14,8 @@ const port = process.env.PORT;
 const host = process.env.HOST;
 
 app.use(express.json());
+app.use(cors())
+
 app.use("/api/v1/user", user);
 app.use("/api/v1/items", item);
 
